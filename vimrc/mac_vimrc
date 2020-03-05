@@ -1,0 +1,40 @@
+"syntax on
+set nu
+filetype plugin on
+set mouse=a
+set tabstop=4       " The width of a TAB is set to 4.
+                    " Still it is a \t. It is just that
+                    " Vim will interpret it to be having
+                    " a width of 4.
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" Plugin 'ycm-core/YouCompleteMe'
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+call plug#begin()
+Plug 'preservim/nerdtree'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer' }
+Plug 'preservim/nerdcommenter'
+
+call plug#end()
+
+
+" auto open nerd tree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+" nerdcommenter settings
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
