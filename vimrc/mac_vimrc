@@ -27,7 +27,21 @@ Plug 'preservim/nerdtree'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer' }
 Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
 call plug#end()
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+ 
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
 
 
 " auto open nerd tree
@@ -38,3 +52,11 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " nerdcommenter settings
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
+
+
+let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py"
+" add the following to ~/.vim/plugged/YouCompleteMe/./ycm_extra_conf.py
+" def Settings( **kwargs ):
+"     return {
+"       'flags': [ '-x', 'c++', '-Wall', '-Wextra', '-Werror' ],
+"     }
