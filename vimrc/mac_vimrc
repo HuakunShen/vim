@@ -26,7 +26,7 @@ call plug#begin()
 Plug 'preservim/nerdtree'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer' }
 Plug 'preservim/nerdcommenter'
-
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 
