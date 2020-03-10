@@ -21,5 +21,6 @@ cd into vimrc, copy `cp` vimrc into home directory (~/) on the machine as `.vimr
 `PluginInstall` for Vundle
 
 4. For C/C++ language support from YouCompleteMe
+
 copy `ycm_extra_conf.py` into `~/.vim/plugged/YouCompleteMe` as `.ycm_extra_conf.py`
 or copy the last function `setting()` into `.ycm_extra_conf.py`
