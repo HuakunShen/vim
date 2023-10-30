@@ -21,5 +21,5 @@ chmod +x /usr/local/bin/manage-nvim
 Or run this script
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/HuakunShen/vim/master/nvim-distro/install.sh)"
 ```
