@@ -1,0 +1,120 @@
+#!/bin/bash
+
+EXE_NAME=manage-nvim
+
+function install() {
+    echo back up existing nvim config
+    # Check if nvim config exists
+    if [ ! -d ~/.config/nvim ]; then
+        mv ~/.config/nvim ~/.config/nvim.bak
+    fi
+
+    if [ ! -d ~/.local/share/nvim ]; then
+        mv ~/.local/share/nvim ~/.local/share/nvim.bak
+    fi
+
+    if [ ! -d ~/.local/state/nvim ]; then
+        mv ~/.local/state/nvim ~/.local/state/nvim.bak
+    fi
+
+    if [ ! -d ~/.cache/nvim ]; then
+        mv ~/.cache/nvim ~/.cache/nvim.bak
+    fi
+
+    echo Install AstroNvim
+    git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim.astronvim
+    git clone https://github.com/LazyVim/starter ~/.config/nvim.lazyvim
+    rm -rf ~/.config/nvim.lazyvim/.git
+
+
+    echo Make Artifact Directories
+    mkdir ~/.local/share/nvim.astronvim
+    mkdir ~/.local/share/nvim.lazyvim
+
+    mkdir ~/.local/state/nvim.astronvim
+    mkdir ~/.local/state/nvim.lazyvim
+
+    mkdir ~/.cache/nvim.astronvim
+    mkdir ~/.cache/nvim.lazyvim
+
+    echo Make symbolic links, default to astronvim
+    ln -s ~/.config/nvim.astronvim ~/.config/nvim
+    ln -s ~/.local/share/nvim.astronvim ~/.local/share/nvim
+    ln -s ~/.local/state/nvim.astronvim ~/.local/state/nvim
+    ln -s ~/.cache/nvim.astronvim ~/.cache/nvim
+}
+
+function clean() {
+    rm -rf ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
+	
+	rm -rf ~/.config/nvim.astronvim
+	rm -rf ~/.config/nvim.lazyvim
+
+	rm -rf ~/.local/share/nvim.astronvim
+	rm -rf ~/.local/share/nvim.lazyvim
+
+	rm -rf ~/.local/state/nvim.astronvim
+	rm -rf ~/.local/state/nvim.lazyvim
+
+	rm -rf ~/.cache/nvim.astronvim
+	rm -rf ~/.cache/nvim.lazyvim
+}
+
+function remove_links() {
+    rm ~/.config/nvim
+	rm ~/.local/share/nvim
+	rm ~/.local/state/nvim
+	rm ~/.cache/nvim
+}
+
+function switch_lazyvim() {
+    remove_links
+	ln -s ~/.config/nvim.lazyvim ~/.config/nvim
+	ln -s ~/.local/share/nvim.lazyvim ~/.local/share/nvim
+	ln -s ~/.local/state/nvim.lazyvim ~/.local/state/nvim
+	ln -s ~/.cache/nvim.lazyvim ~/.cache/nvim
+}
+
+function switch_astronvim() {
+    remove_links
+    ln -s ~/.config/nvim.astronvim ~/.config/nvim
+	ln -s ~/.local/share/nvim.astronvim ~/.local/share/nvim
+	ln -s ~/.local/state/nvim.astronvim ~/.local/state/nvim
+	ln -s ~/.cache/nvim.astronvim ~/.cache/nvim
+}
+
+
+function uninstall() {
+    clean
+    remove_links
+}
+
+function main() {
+    if [[ $1 == "install" ]]; then
+        install
+    elif [[ $1 == "uninstall" ]]; then
+        uninstall
+    elif [[ $1 == "switch-astronvim" ]]; then
+        switch_astronvim
+    elif [[ $1 == "switch-lazyvim" ]]; then
+        switch_lazyvim
+    elif [[ $1 == "clean" ]]; then
+        clean
+    elif [[ $1 == "remove-links" ]]; then
+        remove_links
+    elif [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
+        echo "Options Are:"
+        echo -e "\t$EXE_NAME install"
+        echo -e "\t$EXE_NAME uninstall"
+        echo -e "\t$EXE_NAME switch-astronvim"
+        echo -e "\t$EXE_NAME switch-lazyvim"
+        echo -e "\t$EXE_NAME clean"
+        echo -e "\t$EXE_NAME remove-links"
+        echo -e "\t$EXE_NAME --help [-h]"
+    else
+        echo "No Valid Option"
+        echo "Use --help option to view the available options"
+    fi
+}
+
+main $@
