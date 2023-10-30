@@ -9,3 +9,17 @@ The script manage the installation of nvim, allowing you to have 2 nvim distros 
 ./manage-nvim switch-astronvim # switch to astronvim
 ```
 
+## Install `manage-nvim`
+
+Simply download the script ([manage-nvim](./manage-nvim)) a directory in your path, e.g. `/usr/local/bin`.
+
+```bash
+curl https://raw.githubusercontent.com/HuakunShen/vim/master/nvim-distro/manage-nvim -o /usr/local/bin/manage-nvim
+chmod +x /usr/local/bin/manage-nvim
+```
+
+Or run this script
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
