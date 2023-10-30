@@ -112,7 +112,14 @@ function main() {
         echo -e "\t$EXE_NAME remove-links"
         echo -e "\t$EXE_NAME --help [-h]"
     else
-        echo "No Valid Option"
+        echo "===================================="
+        echo "Here are the links to your nvim config"
+        echo "===================================="
+        ls -l ~/.config/nvim
+        ls -l ~/.local/share/nvim
+        ls -l ~/.local/state/nvim
+        ls -l ~/.cache/nvim
+        echo "===================================="
         echo "Use --help option to view the available options"
     fi
 }

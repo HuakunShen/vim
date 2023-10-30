@@ -22,4 +22,8 @@ Or run this script
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/HuakunShen/vim/master/nvim-distro/install.sh)"
+
+# use sudo if you don't have write permission to /usr/local/bin
+sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/HuakunShen/vim/master/nvim-distro/install.sh)"
 ```
+
